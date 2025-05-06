@@ -1,0 +1,2823 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ee4b1232ba1247af36519f346d96e529 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@master/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+     <h3 align="center" style="font-size:22px; color:#4B0082; font-family:Arial, sans-serif;">
+         <b>Cripple Creek Historic Mining Claims</b>
+     </h3>
+     <p align="center" style="font-size:15px; font-family:Arial, sans-serif; color:#333;">
+         Explore the spatial distribution of historic mining claims in the legendary Cripple Creek mining district. 
+         Use the layer controls to toggle between marker clusters and a heatmap view.
+     </p>
+    
+<div style="
+    position: fixed; 
+    bottom: 50px; left: 20px; width: 210px; height: 110px; 
+    background-color: white; z-index:9999; font-size:13px;
+    border:2px solid #444; border-radius:5px; padding: 10px; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+<b style="color:#4B0082;">Heatmap Density Legend</b><br>
+<span style="background:#b3cde3;width:20px;height:10px;display:inline-block;margin-right:5px;"></span> Low Claim Density<br>
+<span style="background:#8c96c6;width:20px;height:10px;display:inline-block;margin-right:5px;"></span> Moderate Claim Density<br>
+<span style="background:#88419d;width:20px;height:10px;display:inline-block;margin-right:5px;"></span> High Claim Density
+</div>
+    
+<div style="position: fixed; top: 75px; left: 20px; z-index:9999; font-size:18px;">
+    🧭 <b>N</b>
+</div>
+    
+            <div class="folium-map" id="map_ee4b1232ba1247af36519f346d96e529" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ee4b1232ba1247af36519f346d96e529 = L.map(
+                "map_ee4b1232ba1247af36519f346d96e529",
+                {
+                    center: [38.7467, -105.1783],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_792fa4061ce83fa15bbcf0576f866f22 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ee4b1232ba1247af36519f346d96e529);
+        
+    
+            var marker_cluster_fe02ded11b8965685b91d0687c158731 = L.markerClusterGroup(
+                {}
+            );
+            map_ee4b1232ba1247af36519f346d96e529.addLayer(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+            var marker_68ec99d4c9893ac544893b6bb9473f59 = L.marker(
+                [38.754759875892056, -105.24749892447774],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_37db9757de6bf34b1ff8ec25d541ca16 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f9eeb93c753d429035406017b0fea459 = $(`<div id="html_f9eeb93c753d429035406017b0fea459" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Strike No. 1</div>`)[0];
+            popup_37db9757de6bf34b1ff8ec25d541ca16.setContent(html_f9eeb93c753d429035406017b0fea459);
+        
+
+        marker_68ec99d4c9893ac544893b6bb9473f59.bindPopup(popup_37db9757de6bf34b1ff8ec25d541ca16)
+        ;
+
+        
+    
+    
+            marker_68ec99d4c9893ac544893b6bb9473f59.bindTooltip(
+                `<div>
+                     Silver Strike No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3b5cb9713ca8f170923f6769032375ef = L.marker(
+                [38.72925205228584, -105.22767892618512],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_0d8867138866e95fd60dbd7b04b78c6c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fb00c188b322afebe53c48e1b3f19d11 = $(`<div id="html_fb00c188b322afebe53c48e1b3f19d11" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Ridge Extension</div>`)[0];
+            popup_0d8867138866e95fd60dbd7b04b78c6c.setContent(html_fb00c188b322afebe53c48e1b3f19d11);
+        
+
+        marker_3b5cb9713ca8f170923f6769032375ef.bindPopup(popup_0d8867138866e95fd60dbd7b04b78c6c)
+        ;
+
+        
+    
+    
+            marker_3b5cb9713ca8f170923f6769032375ef.bindTooltip(
+                `<div>
+                     Lucky Ridge Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6da966187a8aa064cd3a98bc406d931c = L.marker(
+                [38.76155298499148, -105.18233005125771],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_7133a6f7d6ab1f9d1da6c67dbeeb91f6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d67c010d4562a07a84b305fed0b2f631 = $(`<div id="html_d67c010d4562a07a84b305fed0b2f631" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Shaft Mine</div>`)[0];
+            popup_7133a6f7d6ab1f9d1da6c67dbeeb91f6.setContent(html_d67c010d4562a07a84b305fed0b2f631);
+        
+
+        marker_6da966187a8aa064cd3a98bc406d931c.bindPopup(popup_7133a6f7d6ab1f9d1da6c67dbeeb91f6)
+        ;
+
+        
+    
+    
+            marker_6da966187a8aa064cd3a98bc406d931c.bindTooltip(
+                `<div>
+                     Black Shaft Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d9b9422b193536f3ec7f3cdd2f731b8f = L.marker(
+                [38.77245256973934, -105.24130611673706],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_414eaeeb28b6abc6a4d94e44fb37961e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a2f38432085805fd0bed5c55c29e31a7 = $(`<div id="html_a2f38432085805fd0bed5c55c29e31a7" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Shaft Mine</div>`)[0];
+            popup_414eaeeb28b6abc6a4d94e44fb37961e.setContent(html_a2f38432085805fd0bed5c55c29e31a7);
+        
+
+        marker_d9b9422b193536f3ec7f3cdd2f731b8f.bindPopup(popup_414eaeeb28b6abc6a4d94e44fb37961e)
+        ;
+
+        
+    
+    
+            marker_d9b9422b193536f3ec7f3cdd2f731b8f.bindTooltip(
+                `<div>
+                     Iron Shaft Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b42a2532a5d54322289ad2fc501c87a8 = L.marker(
+                [38.73953452737797, -105.2470202780562],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_adf35f576fba902b4de6559540ce858e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b61ae43502fc9f99677725b8981a373e = $(`<div id="html_b61ae43502fc9f99677725b8981a373e" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Peak Extension</div>`)[0];
+            popup_adf35f576fba902b4de6559540ce858e.setContent(html_b61ae43502fc9f99677725b8981a373e);
+        
+
+        marker_b42a2532a5d54322289ad2fc501c87a8.bindPopup(popup_adf35f576fba902b4de6559540ce858e)
+        ;
+
+        
+    
+    
+            marker_b42a2532a5d54322289ad2fc501c87a8.bindTooltip(
+                `<div>
+                     Lucky Peak Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4d6252106202d2d8b6772e27e0cb090f = L.marker(
+                [38.725304658236254, -105.19946447118967],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_a60207b9c97b4240f6c6b6ed35f30a05 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d3c3a69584786c3907a0cec2f6161d8b = $(`<div id="html_d3c3a69584786c3907a0cec2f6161d8b" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Shaft Prospect</div>`)[0];
+            popup_a60207b9c97b4240f6c6b6ed35f30a05.setContent(html_d3c3a69584786c3907a0cec2f6161d8b);
+        
+
+        marker_4d6252106202d2d8b6772e27e0cb090f.bindPopup(popup_a60207b9c97b4240f6c6b6ed35f30a05)
+        ;
+
+        
+    
+    
+            marker_4d6252106202d2d8b6772e27e0cb090f.bindTooltip(
+                `<div>
+                     Crystal Shaft Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4bc31dbdc6961d9bda340973a7c706cd = L.marker(
+                [38.711857517877874, -105.23011623493133],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b30b6a1aeb8e104e58adb4157473c9fa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7a6c19572cb808ad1e79a90655dc113c = $(`<div id="html_7a6c19572cb808ad1e79a90655dc113c" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Ridge No. 1</div>`)[0];
+            popup_b30b6a1aeb8e104e58adb4157473c9fa.setContent(html_7a6c19572cb808ad1e79a90655dc113c);
+        
+
+        marker_4bc31dbdc6961d9bda340973a7c706cd.bindPopup(popup_b30b6a1aeb8e104e58adb4157473c9fa)
+        ;
+
+        
+    
+    
+            marker_4bc31dbdc6961d9bda340973a7c706cd.bindTooltip(
+                `<div>
+                     Deep Ridge No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e6bbb1e243e755120afa3cea7822e4c9 = L.marker(
+                [38.755491910644565, -105.19550585193969],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_9e66f167d31f78de6052814fab4623f0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_07a68241c7b7b14a8c15d770a13920db = $(`<div id="html_07a68241c7b7b14a8c15d770a13920db" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Peak No. 1</div>`)[0];
+            popup_9e66f167d31f78de6052814fab4623f0.setContent(html_07a68241c7b7b14a8c15d770a13920db);
+        
+
+        marker_e6bbb1e243e755120afa3cea7822e4c9.bindPopup(popup_9e66f167d31f78de6052814fab4623f0)
+        ;
+
+        
+    
+    
+            marker_e6bbb1e243e755120afa3cea7822e4c9.bindTooltip(
+                `<div>
+                     Black Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_acd5a7113940ac784e3626d9ccd802b0 = L.marker(
+                [38.72543084354285, -105.19107343161241],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_cf59459cb9a1b212b516b5d8999eba4a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7892ce0039c0fd86694c7e3deed6aa3f = $(`<div id="html_7892ce0039c0fd86694c7e3deed6aa3f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Hill Prospect</div>`)[0];
+            popup_cf59459cb9a1b212b516b5d8999eba4a.setContent(html_7892ce0039c0fd86694c7e3deed6aa3f);
+        
+
+        marker_acd5a7113940ac784e3626d9ccd802b0.bindPopup(popup_cf59459cb9a1b212b516b5d8999eba4a)
+        ;
+
+        
+    
+    
+            marker_acd5a7113940ac784e3626d9ccd802b0.bindTooltip(
+                `<div>
+                     Golden Hill Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3224b36d64a87bc54aa30de87bb5fd0a = L.marker(
+                [38.76666013196745, -105.24935012403219],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_48cd3635b7d8ba1991057249953f3170 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_31d18fbaa001173a354bae3f8f75aa84 = $(`<div id="html_31d18fbaa001173a354bae3f8f75aa84" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Spur Prospect</div>`)[0];
+            popup_48cd3635b7d8ba1991057249953f3170.setContent(html_31d18fbaa001173a354bae3f8f75aa84);
+        
+
+        marker_3224b36d64a87bc54aa30de87bb5fd0a.bindPopup(popup_48cd3635b7d8ba1991057249953f3170)
+        ;
+
+        
+    
+    
+            marker_3224b36d64a87bc54aa30de87bb5fd0a.bindTooltip(
+                `<div>
+                     Deep Spur Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a4b0c647d8d3a8639bbb27dc17bc56e4 = L.marker(
+                [38.766407347628295, -105.18018606050119],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e922b3438752ed8701dec887110e03e7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2042be522ecc3a5e80c43ebdb1181424 = $(`<div id="html_2042be522ecc3a5e80c43ebdb1181424" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Spur Mine</div>`)[0];
+            popup_e922b3438752ed8701dec887110e03e7.setContent(html_2042be522ecc3a5e80c43ebdb1181424);
+        
+
+        marker_a4b0c647d8d3a8639bbb27dc17bc56e4.bindPopup(popup_e922b3438752ed8701dec887110e03e7)
+        ;
+
+        
+    
+    
+            marker_a4b0c647d8d3a8639bbb27dc17bc56e4.bindTooltip(
+                `<div>
+                     Deadman Spur Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_de8aca4ea6b1ad04120232006dd69a65 = L.marker(
+                [38.73381753615626, -105.23445205001882],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_af077dfdfb9659f19257e546b2c7e890 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1e6790c81c0de165746ca3d3cc448008 = $(`<div id="html_1e6790c81c0de165746ca3d3cc448008" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Ridge Group</div>`)[0];
+            popup_af077dfdfb9659f19257e546b2c7e890.setContent(html_1e6790c81c0de165746ca3d3cc448008);
+        
+
+        marker_de8aca4ea6b1ad04120232006dd69a65.bindPopup(popup_af077dfdfb9659f19257e546b2c7e890)
+        ;
+
+        
+    
+    
+            marker_de8aca4ea6b1ad04120232006dd69a65.bindTooltip(
+                `<div>
+                     Lost Ridge Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_99bfa050fd9205b322a8b3f1cf04e680 = L.marker(
+                [38.777004915054476, -105.21634054548873],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_911c934466a603c34690e8e6ac632490 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fd74da3ceb7f3e8b88a50218be67f27d = $(`<div id="html_fd74da3ceb7f3e8b88a50218be67f27d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Claim Mine</div>`)[0];
+            popup_911c934466a603c34690e8e6ac632490.setContent(html_fd74da3ceb7f3e8b88a50218be67f27d);
+        
+
+        marker_99bfa050fd9205b322a8b3f1cf04e680.bindPopup(popup_911c934466a603c34690e8e6ac632490)
+        ;
+
+        
+    
+    
+            marker_99bfa050fd9205b322a8b3f1cf04e680.bindTooltip(
+                `<div>
+                     Deep Claim Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_739e18e446a89c6a88153e1693d90306 = L.marker(
+                [38.71649220903661, -105.24032836231666],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_2650e683f243c1d3047e7b636f1abf2c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f3daf9056e4eda8d5d9a5ae69ee607a5 = $(`<div id="html_f3daf9056e4eda8d5d9a5ae69ee607a5" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Lode No. 1</div>`)[0];
+            popup_2650e683f243c1d3047e7b636f1abf2c.setContent(html_f3daf9056e4eda8d5d9a5ae69ee607a5);
+        
+
+        marker_739e18e446a89c6a88153e1693d90306.bindPopup(popup_2650e683f243c1d3047e7b636f1abf2c)
+        ;
+
+        
+    
+    
+            marker_739e18e446a89c6a88153e1693d90306.bindTooltip(
+                `<div>
+                     Deep Lode No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ae741f00248c4d6925a9f7d6533ba3d9 = L.marker(
+                [38.76932460564432, -105.18962739686332],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_c51229e99d97ab4499e17186997c7063 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_29d3bbb315b36cbd507f280aabe0fc16 = $(`<div id="html_29d3bbb315b36cbd507f280aabe0fc16" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Hill Mine</div>`)[0];
+            popup_c51229e99d97ab4499e17186997c7063.setContent(html_29d3bbb315b36cbd507f280aabe0fc16);
+        
+
+        marker_ae741f00248c4d6925a9f7d6533ba3d9.bindPopup(popup_c51229e99d97ab4499e17186997c7063)
+        ;
+
+        
+    
+    
+            marker_ae741f00248c4d6925a9f7d6533ba3d9.bindTooltip(
+                `<div>
+                     Silver Hill Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_43f601b3b36aeecd85446550d55480c5 = L.marker(
+                [38.76649897912921, -105.17702682133063],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_9fdfba51b32d2d097ca58baafa735f6e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e19192960b3309f38d1b0bcb88bedac8 = $(`<div id="html_e19192960b3309f38d1b0bcb88bedac8" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Shaft Mine</div>`)[0];
+            popup_9fdfba51b32d2d097ca58baafa735f6e.setContent(html_e19192960b3309f38d1b0bcb88bedac8);
+        
+
+        marker_43f601b3b36aeecd85446550d55480c5.bindPopup(popup_9fdfba51b32d2d097ca58baafa735f6e)
+        ;
+
+        
+    
+    
+            marker_43f601b3b36aeecd85446550d55480c5.bindTooltip(
+                `<div>
+                     Black Shaft Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9ec3df5443e7e6ca1bf2bb0ddebc9c00 = L.marker(
+                [38.74753596640183, -105.15268842360207],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b7b0d535725524e3d4e9e7ee3ee688b4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_880130892f1c0195210dfd32cfbdcc0c = $(`<div id="html_880130892f1c0195210dfd32cfbdcc0c" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Strike Group</div>`)[0];
+            popup_b7b0d535725524e3d4e9e7ee3ee688b4.setContent(html_880130892f1c0195210dfd32cfbdcc0c);
+        
+
+        marker_9ec3df5443e7e6ca1bf2bb0ddebc9c00.bindPopup(popup_b7b0d535725524e3d4e9e7ee3ee688b4)
+        ;
+
+        
+    
+    
+            marker_9ec3df5443e7e6ca1bf2bb0ddebc9c00.bindTooltip(
+                `<div>
+                     Lost Strike Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2e5e33b980f0e720afedc9df585bc652 = L.marker(
+                [38.73649740640459, -105.19479593687268],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_cda466448fe8533108b2389eca17b266 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d2e079d8fa396e118e91b1e7313a9eda = $(`<div id="html_d2e079d8fa396e118e91b1e7313a9eda" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Spur Group</div>`)[0];
+            popup_cda466448fe8533108b2389eca17b266.setContent(html_d2e079d8fa396e118e91b1e7313a9eda);
+        
+
+        marker_2e5e33b980f0e720afedc9df585bc652.bindPopup(popup_cda466448fe8533108b2389eca17b266)
+        ;
+
+        
+    
+    
+            marker_2e5e33b980f0e720afedc9df585bc652.bindTooltip(
+                `<div>
+                     Lost Spur Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b7df6f26923b13c60728cbf076a0c3a9 = L.marker(
+                [38.76805832649771, -105.18814802476358],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e3bc9ffd1711d133f2e528c2d7e29326 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8ce61db83d2ad9d5e1fbc3c43044326d = $(`<div id="html_8ce61db83d2ad9d5e1fbc3c43044326d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Shaft Prospect</div>`)[0];
+            popup_e3bc9ffd1711d133f2e528c2d7e29326.setContent(html_8ce61db83d2ad9d5e1fbc3c43044326d);
+        
+
+        marker_b7df6f26923b13c60728cbf076a0c3a9.bindPopup(popup_e3bc9ffd1711d133f2e528c2d7e29326)
+        ;
+
+        
+    
+    
+            marker_b7df6f26923b13c60728cbf076a0c3a9.bindTooltip(
+                `<div>
+                     Silver Shaft Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8fe2a799e132485d5ce9c38a19dcba4c = L.marker(
+                [38.77031948302176, -105.19226478547432],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_f62816643bd0556d42d295bd70a7ff36 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_191ddf85db4b0d7cc5fd8096870ed630 = $(`<div id="html_191ddf85db4b0d7cc5fd8096870ed630" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Hill Group</div>`)[0];
+            popup_f62816643bd0556d42d295bd70a7ff36.setContent(html_191ddf85db4b0d7cc5fd8096870ed630);
+        
+
+        marker_8fe2a799e132485d5ce9c38a19dcba4c.bindPopup(popup_f62816643bd0556d42d295bd70a7ff36)
+        ;
+
+        
+    
+    
+            marker_8fe2a799e132485d5ce9c38a19dcba4c.bindTooltip(
+                `<div>
+                     Lost Hill Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fab00bf1ca6310117e577e1595a0b2fe = L.marker(
+                [38.75932002853504, -105.24541756163444],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_f4d4c49159fa4dbe8ae175157c30a5d5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_233276a451c5a95a6f47d06a604fba30 = $(`<div id="html_233276a451c5a95a6f47d06a604fba30" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Peak No. 1</div>`)[0];
+            popup_f4d4c49159fa4dbe8ae175157c30a5d5.setContent(html_233276a451c5a95a6f47d06a604fba30);
+        
+
+        marker_fab00bf1ca6310117e577e1595a0b2fe.bindPopup(popup_f4d4c49159fa4dbe8ae175157c30a5d5)
+        ;
+
+        
+    
+    
+            marker_fab00bf1ca6310117e577e1595a0b2fe.bindTooltip(
+                `<div>
+                     Deadman Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_99c1bdfaa24448e77f74dcb23214d77b = L.marker(
+                [38.72595287929561, -105.22106120363979],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_7c3d227cfd2c37aaa0e49f00dd16d7af = L.popup({"maxWidth": "100%"});
+
+        
+            var html_52454942978ca340f5aa0b67689ff4f3 = $(`<div id="html_52454942978ca340f5aa0b67689ff4f3" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Strike No. 2</div>`)[0];
+            popup_7c3d227cfd2c37aaa0e49f00dd16d7af.setContent(html_52454942978ca340f5aa0b67689ff4f3);
+        
+
+        marker_99c1bdfaa24448e77f74dcb23214d77b.bindPopup(popup_7c3d227cfd2c37aaa0e49f00dd16d7af)
+        ;
+
+        
+    
+    
+            marker_99c1bdfaa24448e77f74dcb23214d77b.bindTooltip(
+                `<div>
+                     Deadman Strike No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ed8d78b79f54da8e1bdfb5abc3c3ee3c = L.marker(
+                [38.71558543838466, -105.2267209113639],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_9b31ac7abc97975dafbc58f92c9ad549 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_19778b29f570deb6a2ee0af76786583f = $(`<div id="html_19778b29f570deb6a2ee0af76786583f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Claim Prospect</div>`)[0];
+            popup_9b31ac7abc97975dafbc58f92c9ad549.setContent(html_19778b29f570deb6a2ee0af76786583f);
+        
+
+        marker_ed8d78b79f54da8e1bdfb5abc3c3ee3c.bindPopup(popup_9b31ac7abc97975dafbc58f92c9ad549)
+        ;
+
+        
+    
+    
+            marker_ed8d78b79f54da8e1bdfb5abc3c3ee3c.bindTooltip(
+                `<div>
+                     Lucky Claim Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_30fd4e1071d5108ef9f5a371f8c06557 = L.marker(
+                [38.717070100058685, -105.22220263968899],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_be6df6e1a608aa51b8a908581ac198b6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0df882188194d80b380fff4fc643c978 = $(`<div id="html_0df882188194d80b380fff4fc643c978" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Ridge No. 2</div>`)[0];
+            popup_be6df6e1a608aa51b8a908581ac198b6.setContent(html_0df882188194d80b380fff4fc643c978);
+        
+
+        marker_30fd4e1071d5108ef9f5a371f8c06557.bindPopup(popup_be6df6e1a608aa51b8a908581ac198b6)
+        ;
+
+        
+    
+    
+            marker_30fd4e1071d5108ef9f5a371f8c06557.bindTooltip(
+                `<div>
+                     Crystal Ridge No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_757d85c8db22a069026126eacbb60f8c = L.marker(
+                [38.75449791109851, -105.213516782103],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_ed33d8c10596b1a87e9405f75083f4d3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_64fe327e0ebc07cc65a925ae7616380a = $(`<div id="html_64fe327e0ebc07cc65a925ae7616380a" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Spur Extension</div>`)[0];
+            popup_ed33d8c10596b1a87e9405f75083f4d3.setContent(html_64fe327e0ebc07cc65a925ae7616380a);
+        
+
+        marker_757d85c8db22a069026126eacbb60f8c.bindPopup(popup_ed33d8c10596b1a87e9405f75083f4d3)
+        ;
+
+        
+    
+    
+            marker_757d85c8db22a069026126eacbb60f8c.bindTooltip(
+                `<div>
+                     Silver Spur Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1644cd368ba70f43da3f33dec063c17e = L.marker(
+                [38.73591266769818, -105.22904929692285],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_ea9a367140e4984262707a4468108a20 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_79ac7aec4b539ea49ab51d482e30f409 = $(`<div id="html_79ac7aec4b539ea49ab51d482e30f409" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Hill Mine</div>`)[0];
+            popup_ea9a367140e4984262707a4468108a20.setContent(html_79ac7aec4b539ea49ab51d482e30f409);
+        
+
+        marker_1644cd368ba70f43da3f33dec063c17e.bindPopup(popup_ea9a367140e4984262707a4468108a20)
+        ;
+
+        
+    
+    
+            marker_1644cd368ba70f43da3f33dec063c17e.bindTooltip(
+                `<div>
+                     Lost Hill Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7a1809240f9b1a320c9e4f9c2ff4c604 = L.marker(
+                [38.72868844754344, -105.15633454122876],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_d3b8d865c9cffe3a830cfccf7ac9a391 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cb85ee580aece5aa45769047563411ac = $(`<div id="html_cb85ee580aece5aa45769047563411ac" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Tunnel No. 1</div>`)[0];
+            popup_d3b8d865c9cffe3a830cfccf7ac9a391.setContent(html_cb85ee580aece5aa45769047563411ac);
+        
+
+        marker_7a1809240f9b1a320c9e4f9c2ff4c604.bindPopup(popup_d3b8d865c9cffe3a830cfccf7ac9a391)
+        ;
+
+        
+    
+    
+            marker_7a1809240f9b1a320c9e4f9c2ff4c604.bindTooltip(
+                `<div>
+                     Silver Tunnel No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7c451218855c74612e8f96264d5bf2e7 = L.marker(
+                [38.755362476967264, -105.1890868994333],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_2ca7a3d04764d6d43c9cf8cac064acc3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_48852f5c3d7e602226c8eea298e637c3 = $(`<div id="html_48852f5c3d7e602226c8eea298e637c3" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Peak No. 1</div>`)[0];
+            popup_2ca7a3d04764d6d43c9cf8cac064acc3.setContent(html_48852f5c3d7e602226c8eea298e637c3);
+        
+
+        marker_7c451218855c74612e8f96264d5bf2e7.bindPopup(popup_2ca7a3d04764d6d43c9cf8cac064acc3)
+        ;
+
+        
+    
+    
+            marker_7c451218855c74612e8f96264d5bf2e7.bindTooltip(
+                `<div>
+                     Deep Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3d696c63b377f5933124ec3500449b43 = L.marker(
+                [38.72197970537387, -105.17708732020498],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_cf16fb3cb4e3ce536a29bfa5d8674094 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0510e24b60d559545ac022ad06602952 = $(`<div id="html_0510e24b60d559545ac022ad06602952" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Lode No. 1</div>`)[0];
+            popup_cf16fb3cb4e3ce536a29bfa5d8674094.setContent(html_0510e24b60d559545ac022ad06602952);
+        
+
+        marker_3d696c63b377f5933124ec3500449b43.bindPopup(popup_cf16fb3cb4e3ce536a29bfa5d8674094)
+        ;
+
+        
+    
+    
+            marker_3d696c63b377f5933124ec3500449b43.bindTooltip(
+                `<div>
+                     Deadman Lode No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5ee41aabd1eeee3a9983f65c119c8ebe = L.marker(
+                [38.72143817456334, -105.21205445582424],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_62b57adf018521a616103993f61a4153 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3962bb9c0495fe455c976284a0351130 = $(`<div id="html_3962bb9c0495fe455c976284a0351130" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Peak No. 1</div>`)[0];
+            popup_62b57adf018521a616103993f61a4153.setContent(html_3962bb9c0495fe455c976284a0351130);
+        
+
+        marker_5ee41aabd1eeee3a9983f65c119c8ebe.bindPopup(popup_62b57adf018521a616103993f61a4153)
+        ;
+
+        
+    
+    
+            marker_5ee41aabd1eeee3a9983f65c119c8ebe.bindTooltip(
+                `<div>
+                     Deadman Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cf33e35c21f15e4616ab94c6be73afd6 = L.marker(
+                [38.77926663454456, -105.18600002401459],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_bdfd45ba05a92497d43ca029cbeab498 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fc7b892190cc58155aecd336919d7cbd = $(`<div id="html_fc7b892190cc58155aecd336919d7cbd" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Tunnel Prospect</div>`)[0];
+            popup_bdfd45ba05a92497d43ca029cbeab498.setContent(html_fc7b892190cc58155aecd336919d7cbd);
+        
+
+        marker_cf33e35c21f15e4616ab94c6be73afd6.bindPopup(popup_bdfd45ba05a92497d43ca029cbeab498)
+        ;
+
+        
+    
+    
+            marker_cf33e35c21f15e4616ab94c6be73afd6.bindTooltip(
+                `<div>
+                     High Tunnel Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f549411150ca4f991b635c5e1d8e22c3 = L.marker(
+                [38.748986482064225, -105.18153857490101],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_eb50d694a57caa570316bad802f9c001 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_79af1c1f9238aec43472c2a8043e5006 = $(`<div id="html_79af1c1f9238aec43472c2a8043e5006" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Hill Prospect</div>`)[0];
+            popup_eb50d694a57caa570316bad802f9c001.setContent(html_79af1c1f9238aec43472c2a8043e5006);
+        
+
+        marker_f549411150ca4f991b635c5e1d8e22c3.bindPopup(popup_eb50d694a57caa570316bad802f9c001)
+        ;
+
+        
+    
+    
+            marker_f549411150ca4f991b635c5e1d8e22c3.bindTooltip(
+                `<div>
+                     Crystal Hill Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b6ef48e2174c746ecb14d7fdbaed8d57 = L.marker(
+                [38.76899963441329, -105.17240000884539],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_090399ccc92730c475b9de5dd5337d45 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_92d0bec69f1779eb198aeaa7677e05b3 = $(`<div id="html_92d0bec69f1779eb198aeaa7677e05b3" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Spur Prospect</div>`)[0];
+            popup_090399ccc92730c475b9de5dd5337d45.setContent(html_92d0bec69f1779eb198aeaa7677e05b3);
+        
+
+        marker_b6ef48e2174c746ecb14d7fdbaed8d57.bindPopup(popup_090399ccc92730c475b9de5dd5337d45)
+        ;
+
+        
+    
+    
+            marker_b6ef48e2174c746ecb14d7fdbaed8d57.bindTooltip(
+                `<div>
+                     Deep Spur Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_18ca45dfafa8e5c8b4727a3f00d1f68e = L.marker(
+                [38.72603336503749, -105.2467899756096],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_9f902d81edc7db455cdc698ed4cc9871 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f563035120f29b98f7e85cc1fa48f1fd = $(`<div id="html_f563035120f29b98f7e85cc1fa48f1fd" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Peak Prospect</div>`)[0];
+            popup_9f902d81edc7db455cdc698ed4cc9871.setContent(html_f563035120f29b98f7e85cc1fa48f1fd);
+        
+
+        marker_18ca45dfafa8e5c8b4727a3f00d1f68e.bindPopup(popup_9f902d81edc7db455cdc698ed4cc9871)
+        ;
+
+        
+    
+    
+            marker_18ca45dfafa8e5c8b4727a3f00d1f68e.bindTooltip(
+                `<div>
+                     Deep Peak Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9131dce58edf9139e91fa35646182197 = L.marker(
+                [38.73208171336414, -105.22322591240243],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_5f7593e3f980f363e61531d2d201ce37 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6aca7c157a8c26a3a9b32e08e10ff371 = $(`<div id="html_6aca7c157a8c26a3a9b32e08e10ff371" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Claim No. 2</div>`)[0];
+            popup_5f7593e3f980f363e61531d2d201ce37.setContent(html_6aca7c157a8c26a3a9b32e08e10ff371);
+        
+
+        marker_9131dce58edf9139e91fa35646182197.bindPopup(popup_5f7593e3f980f363e61531d2d201ce37)
+        ;
+
+        
+    
+    
+            marker_9131dce58edf9139e91fa35646182197.bindTooltip(
+                `<div>
+                     Silver Claim No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_09ef723ddefa379722e3ed33073be240 = L.marker(
+                [38.72476879905104, -105.1557090285665],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_50c3c3ee755a211d569f74476584ef94 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_51314b3db92967073cc8905c04a97ef5 = $(`<div id="html_51314b3db92967073cc8905c04a97ef5" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Lode Prospect</div>`)[0];
+            popup_50c3c3ee755a211d569f74476584ef94.setContent(html_51314b3db92967073cc8905c04a97ef5);
+        
+
+        marker_09ef723ddefa379722e3ed33073be240.bindPopup(popup_50c3c3ee755a211d569f74476584ef94)
+        ;
+
+        
+    
+    
+            marker_09ef723ddefa379722e3ed33073be240.bindTooltip(
+                `<div>
+                     Silver Lode Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a5720c54dab8204cff11c3b310e1dcf8 = L.marker(
+                [38.77134573385309, -105.21853221192015],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_5b336a6dc5255f6ed8049ec6834f244b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dc017044c3ef9e827fdf0260c2121f2d = $(`<div id="html_dc017044c3ef9e827fdf0260c2121f2d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Claim No. 2</div>`)[0];
+            popup_5b336a6dc5255f6ed8049ec6834f244b.setContent(html_dc017044c3ef9e827fdf0260c2121f2d);
+        
+
+        marker_a5720c54dab8204cff11c3b310e1dcf8.bindPopup(popup_5b336a6dc5255f6ed8049ec6834f244b)
+        ;
+
+        
+    
+    
+            marker_a5720c54dab8204cff11c3b310e1dcf8.bindTooltip(
+                `<div>
+                     Deep Claim No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0b3ba415b1e4097aa243ebe8eae2850e = L.marker(
+                [38.75588070657064, -105.21043680989393],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_cbd992f10c577a2105d8c40c39d5b3d9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b082ef3a3042a3130838e4326181cba5 = $(`<div id="html_b082ef3a3042a3130838e4326181cba5" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Hill No. 1</div>`)[0];
+            popup_cbd992f10c577a2105d8c40c39d5b3d9.setContent(html_b082ef3a3042a3130838e4326181cba5);
+        
+
+        marker_0b3ba415b1e4097aa243ebe8eae2850e.bindPopup(popup_cbd992f10c577a2105d8c40c39d5b3d9)
+        ;
+
+        
+    
+    
+            marker_0b3ba415b1e4097aa243ebe8eae2850e.bindTooltip(
+                `<div>
+                     Crystal Hill No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5d53ccc46e483f900767157e60320866 = L.marker(
+                [38.77401833128184, -105.20411481474126],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_6a5aa42cb8bb3d3275b84a6c3187311c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_26e6ae95913744b5339821a770f133a5 = $(`<div id="html_26e6ae95913744b5339821a770f133a5" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Strike Prospect</div>`)[0];
+            popup_6a5aa42cb8bb3d3275b84a6c3187311c.setContent(html_26e6ae95913744b5339821a770f133a5);
+        
+
+        marker_5d53ccc46e483f900767157e60320866.bindPopup(popup_6a5aa42cb8bb3d3275b84a6c3187311c)
+        ;
+
+        
+    
+    
+            marker_5d53ccc46e483f900767157e60320866.bindTooltip(
+                `<div>
+                     Deadman Strike Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e1029eb952c800269168249d113c2ecd = L.marker(
+                [38.72854161165486, -105.2253372492306],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_de987fdac558755b41300e33478f7c39 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7329c796fdbe46c88a945efe83354d45 = $(`<div id="html_7329c796fdbe46c88a945efe83354d45" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Tunnel Extension</div>`)[0];
+            popup_de987fdac558755b41300e33478f7c39.setContent(html_7329c796fdbe46c88a945efe83354d45);
+        
+
+        marker_e1029eb952c800269168249d113c2ecd.bindPopup(popup_de987fdac558755b41300e33478f7c39)
+        ;
+
+        
+    
+    
+            marker_e1029eb952c800269168249d113c2ecd.bindTooltip(
+                `<div>
+                     Crystal Tunnel Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5e801bdc07c200dd5f6cf0fdf9c30293 = L.marker(
+                [38.74929576939142, -105.2237258391477],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e50e98dd0fe56feb338b6d65975281da = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2bd758a1ee6413fd5834093c34c7f8fd = $(`<div id="html_2bd758a1ee6413fd5834093c34c7f8fd" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Spur Mine</div>`)[0];
+            popup_e50e98dd0fe56feb338b6d65975281da.setContent(html_2bd758a1ee6413fd5834093c34c7f8fd);
+        
+
+        marker_5e801bdc07c200dd5f6cf0fdf9c30293.bindPopup(popup_e50e98dd0fe56feb338b6d65975281da)
+        ;
+
+        
+    
+    
+            marker_5e801bdc07c200dd5f6cf0fdf9c30293.bindTooltip(
+                `<div>
+                     Crystal Spur Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_aec93a9bc86351453411e8c92ba778f9 = L.marker(
+                [38.75092101931565, -105.16021771163976],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_48e5f637e9bebbabd06be9668710bc4c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_256f6d224b8ef405ed4759d6ea202c58 = $(`<div id="html_256f6d224b8ef405ed4759d6ea202c58" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Peak Mine</div>`)[0];
+            popup_48e5f637e9bebbabd06be9668710bc4c.setContent(html_256f6d224b8ef405ed4759d6ea202c58);
+        
+
+        marker_aec93a9bc86351453411e8c92ba778f9.bindPopup(popup_48e5f637e9bebbabd06be9668710bc4c)
+        ;
+
+        
+    
+    
+            marker_aec93a9bc86351453411e8c92ba778f9.bindTooltip(
+                `<div>
+                     Lucky Peak Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fc254c0c4a74941aceab591f18334f12 = L.marker(
+                [38.73795803535983, -105.22806792408427],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_aae8fd9552e289588c73cc324998d14b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_934b343bddc17ef865212db2d27289f0 = $(`<div id="html_934b343bddc17ef865212db2d27289f0" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Rock No. 1</div>`)[0];
+            popup_aae8fd9552e289588c73cc324998d14b.setContent(html_934b343bddc17ef865212db2d27289f0);
+        
+
+        marker_fc254c0c4a74941aceab591f18334f12.bindPopup(popup_aae8fd9552e289588c73cc324998d14b)
+        ;
+
+        
+    
+    
+            marker_fc254c0c4a74941aceab591f18334f12.bindTooltip(
+                `<div>
+                     Golden Rock No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_49264afee760b0cabb4bb52ea1ba64f2 = L.marker(
+                [38.77982763245466, -105.19904737063236],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_f705d3eacec101de0eaafafb95fe3b6a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b38e40ed14e7c5980ae2eadcee850ec4 = $(`<div id="html_b38e40ed14e7c5980ae2eadcee850ec4" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Claim Prospect</div>`)[0];
+            popup_f705d3eacec101de0eaafafb95fe3b6a.setContent(html_b38e40ed14e7c5980ae2eadcee850ec4);
+        
+
+        marker_49264afee760b0cabb4bb52ea1ba64f2.bindPopup(popup_f705d3eacec101de0eaafafb95fe3b6a)
+        ;
+
+        
+    
+    
+            marker_49264afee760b0cabb4bb52ea1ba64f2.bindTooltip(
+                `<div>
+                     Crystal Claim Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d1778ea7f9f3313f3f582327adbffdc7 = L.marker(
+                [38.71636365885217, -105.24528836245753],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b500ce8d8ba8e910b9ea3b4d63f53cf4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6449f2458000c1951a5e1b2599e758a0 = $(`<div id="html_6449f2458000c1951a5e1b2599e758a0" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Tunnel Prospect</div>`)[0];
+            popup_b500ce8d8ba8e910b9ea3b4d63f53cf4.setContent(html_6449f2458000c1951a5e1b2599e758a0);
+        
+
+        marker_d1778ea7f9f3313f3f582327adbffdc7.bindPopup(popup_b500ce8d8ba8e910b9ea3b4d63f53cf4)
+        ;
+
+        
+    
+    
+            marker_d1778ea7f9f3313f3f582327adbffdc7.bindTooltip(
+                `<div>
+                     High Tunnel Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3527a0ff06df40be3141c1ecb5760e57 = L.marker(
+                [38.71767543912455, -105.1872553958297],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_afeafba8a97dff176c33f2366302fd70 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b7c5e1e480f56df276da1ca04c140b78 = $(`<div id="html_b7c5e1e480f56df276da1ca04c140b78" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Tunnel Mine</div>`)[0];
+            popup_afeafba8a97dff176c33f2366302fd70.setContent(html_b7c5e1e480f56df276da1ca04c140b78);
+        
+
+        marker_3527a0ff06df40be3141c1ecb5760e57.bindPopup(popup_afeafba8a97dff176c33f2366302fd70)
+        ;
+
+        
+    
+    
+            marker_3527a0ff06df40be3141c1ecb5760e57.bindTooltip(
+                `<div>
+                     Lucky Tunnel Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_321b8a0cb5ce3341d01a9b2bf28212fa = L.marker(
+                [38.76544555550541, -105.20778400332003],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_45d90e63fa61404cc633d4f482d5ea54 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bad3c2190fae54053bc0aa32b5753179 = $(`<div id="html_bad3c2190fae54053bc0aa32b5753179" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Lode Prospect</div>`)[0];
+            popup_45d90e63fa61404cc633d4f482d5ea54.setContent(html_bad3c2190fae54053bc0aa32b5753179);
+        
+
+        marker_321b8a0cb5ce3341d01a9b2bf28212fa.bindPopup(popup_45d90e63fa61404cc633d4f482d5ea54)
+        ;
+
+        
+    
+    
+            marker_321b8a0cb5ce3341d01a9b2bf28212fa.bindTooltip(
+                `<div>
+                     Silver Lode Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_20ccdd154117a3d0fdbf096e2a024bc8 = L.marker(
+                [38.71444693943064, -105.21183807134935],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b969c6fc1efece799c93ec6189edac01 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b3296a1628ab02c8c80fa23e3453b4d6 = $(`<div id="html_b3296a1628ab02c8c80fa23e3453b4d6" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Tunnel Mine</div>`)[0];
+            popup_b969c6fc1efece799c93ec6189edac01.setContent(html_b3296a1628ab02c8c80fa23e3453b4d6);
+        
+
+        marker_20ccdd154117a3d0fdbf096e2a024bc8.bindPopup(popup_b969c6fc1efece799c93ec6189edac01)
+        ;
+
+        
+    
+    
+            marker_20ccdd154117a3d0fdbf096e2a024bc8.bindTooltip(
+                `<div>
+                     Iron Tunnel Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d5be0d9110fb674906012cf9ecf92e3d = L.marker(
+                [38.779728496616805, -105.19708856549009],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_aeaab5061f68e2bc722ce1bce97df367 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f52d4f4dfdfe33568ad20ad61de4c53f = $(`<div id="html_f52d4f4dfdfe33568ad20ad61de4c53f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Hill Group</div>`)[0];
+            popup_aeaab5061f68e2bc722ce1bce97df367.setContent(html_f52d4f4dfdfe33568ad20ad61de4c53f);
+        
+
+        marker_d5be0d9110fb674906012cf9ecf92e3d.bindPopup(popup_aeaab5061f68e2bc722ce1bce97df367)
+        ;
+
+        
+    
+    
+            marker_d5be0d9110fb674906012cf9ecf92e3d.bindTooltip(
+                `<div>
+                     Deadman Hill Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_be4fc087a2a9eaa12869597f3f00048f = L.marker(
+                [38.77797548643296, -105.16392202977656],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_5b0363c843bbd13f5edcf4c87aef2f10 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1218c4d3c02185f17092bda51bc99b09 = $(`<div id="html_1218c4d3c02185f17092bda51bc99b09" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Shaft No. 1</div>`)[0];
+            popup_5b0363c843bbd13f5edcf4c87aef2f10.setContent(html_1218c4d3c02185f17092bda51bc99b09);
+        
+
+        marker_be4fc087a2a9eaa12869597f3f00048f.bindPopup(popup_5b0363c843bbd13f5edcf4c87aef2f10)
+        ;
+
+        
+    
+    
+            marker_be4fc087a2a9eaa12869597f3f00048f.bindTooltip(
+                `<div>
+                     Iron Shaft No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_db5cab7683a64b6f093be1c71cb1fb6c = L.marker(
+                [38.710803671536, -105.17792781806398],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_ed2b8aefc1a15b972cb8baaef29cbe49 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_142d0100052224ba71da4f0e6e9a1533 = $(`<div id="html_142d0100052224ba71da4f0e6e9a1533" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Peak No. 2</div>`)[0];
+            popup_ed2b8aefc1a15b972cb8baaef29cbe49.setContent(html_142d0100052224ba71da4f0e6e9a1533);
+        
+
+        marker_db5cab7683a64b6f093be1c71cb1fb6c.bindPopup(popup_ed2b8aefc1a15b972cb8baaef29cbe49)
+        ;
+
+        
+    
+    
+            marker_db5cab7683a64b6f093be1c71cb1fb6c.bindTooltip(
+                `<div>
+                     Golden Peak No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b0bebdea0139e95b33a1a2b5fce96601 = L.marker(
+                [38.75771972583186, -105.19630296695912],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_fe00f284b8528f4134aa46b0c32ac694 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1d7abaa71a9ddc7fa9a8a48c59330378 = $(`<div id="html_1d7abaa71a9ddc7fa9a8a48c59330378" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Rock No. 1</div>`)[0];
+            popup_fe00f284b8528f4134aa46b0c32ac694.setContent(html_1d7abaa71a9ddc7fa9a8a48c59330378);
+        
+
+        marker_b0bebdea0139e95b33a1a2b5fce96601.bindPopup(popup_fe00f284b8528f4134aa46b0c32ac694)
+        ;
+
+        
+    
+    
+            marker_b0bebdea0139e95b33a1a2b5fce96601.bindTooltip(
+                `<div>
+                     Golden Rock No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_87f9319b39eaf3c33d9804f2ef3c83ef = L.marker(
+                [38.72867776329668, -105.18590382014202],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_9328dd44197ed2bdcbb0b0a09391201f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_755b6b045017a240d3f4a4bb393890c0 = $(`<div id="html_755b6b045017a240d3f4a4bb393890c0" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Lode No. 2</div>`)[0];
+            popup_9328dd44197ed2bdcbb0b0a09391201f.setContent(html_755b6b045017a240d3f4a4bb393890c0);
+        
+
+        marker_87f9319b39eaf3c33d9804f2ef3c83ef.bindPopup(popup_9328dd44197ed2bdcbb0b0a09391201f)
+        ;
+
+        
+    
+    
+            marker_87f9319b39eaf3c33d9804f2ef3c83ef.bindTooltip(
+                `<div>
+                     Black Lode No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7bbe98bf1dd40c802ef19b39c596520c = L.marker(
+                [38.71780865215171, -105.20652347493309],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_47870d6fe95ed5f222b3015b8d7f67c1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_250c5332de6e48f50c2b3da92a52b4fa = $(`<div id="html_250c5332de6e48f50c2b3da92a52b4fa" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Shaft Group</div>`)[0];
+            popup_47870d6fe95ed5f222b3015b8d7f67c1.setContent(html_250c5332de6e48f50c2b3da92a52b4fa);
+        
+
+        marker_7bbe98bf1dd40c802ef19b39c596520c.bindPopup(popup_47870d6fe95ed5f222b3015b8d7f67c1)
+        ;
+
+        
+    
+    
+            marker_7bbe98bf1dd40c802ef19b39c596520c.bindTooltip(
+                `<div>
+                     Deep Shaft Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f48d1401eeec0048e4316989d4383c32 = L.marker(
+                [38.741760659443045, -105.1546184072479],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e6559b03a757258616a4badb2eeacbfb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_33641b6c86e24dae9f99a82f53bdb010 = $(`<div id="html_33641b6c86e24dae9f99a82f53bdb010" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Strike No. 1</div>`)[0];
+            popup_e6559b03a757258616a4badb2eeacbfb.setContent(html_33641b6c86e24dae9f99a82f53bdb010);
+        
+
+        marker_f48d1401eeec0048e4316989d4383c32.bindPopup(popup_e6559b03a757258616a4badb2eeacbfb)
+        ;
+
+        
+    
+    
+            marker_f48d1401eeec0048e4316989d4383c32.bindTooltip(
+                `<div>
+                     Iron Strike No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5a6d10ce769bcbadd1eb1198e3b821ec = L.marker(
+                [38.771309705826475, -105.22366109492489],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_859a15167d22257055465de1bac04a8c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_019cc8b92c0a13525ef6ca624cfff633 = $(`<div id="html_019cc8b92c0a13525ef6ca624cfff633" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Shaft Mine</div>`)[0];
+            popup_859a15167d22257055465de1bac04a8c.setContent(html_019cc8b92c0a13525ef6ca624cfff633);
+        
+
+        marker_5a6d10ce769bcbadd1eb1198e3b821ec.bindPopup(popup_859a15167d22257055465de1bac04a8c)
+        ;
+
+        
+    
+    
+            marker_5a6d10ce769bcbadd1eb1198e3b821ec.bindTooltip(
+                `<div>
+                     Iron Shaft Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_16f3be04f3dbf9b5625135bcd34984a4 = L.marker(
+                [38.74504102791352, -105.23213481194699],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_1a76eb8428aadf2f43e4b5f36fb39b98 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a7922090d79829d36de45a08b5504a13 = $(`<div id="html_a7922090d79829d36de45a08b5504a13" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Rock Extension</div>`)[0];
+            popup_1a76eb8428aadf2f43e4b5f36fb39b98.setContent(html_a7922090d79829d36de45a08b5504a13);
+        
+
+        marker_16f3be04f3dbf9b5625135bcd34984a4.bindPopup(popup_1a76eb8428aadf2f43e4b5f36fb39b98)
+        ;
+
+        
+    
+    
+            marker_16f3be04f3dbf9b5625135bcd34984a4.bindTooltip(
+                `<div>
+                     Iron Rock Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_627bf1b8742f7d202c9837f86a7e2380 = L.marker(
+                [38.77388394875414, -105.16294814301632],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_73a6b399fc8380304ee4ede5ea4bd3a9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3fe6429e194abcc412129cb2f3750f86 = $(`<div id="html_3fe6429e194abcc412129cb2f3750f86" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Peak No. 1</div>`)[0];
+            popup_73a6b399fc8380304ee4ede5ea4bd3a9.setContent(html_3fe6429e194abcc412129cb2f3750f86);
+        
+
+        marker_627bf1b8742f7d202c9837f86a7e2380.bindPopup(popup_73a6b399fc8380304ee4ede5ea4bd3a9)
+        ;
+
+        
+    
+    
+            marker_627bf1b8742f7d202c9837f86a7e2380.bindTooltip(
+                `<div>
+                     Black Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_70a9f57cba27a274bc7bba06238d82b9 = L.marker(
+                [38.73089113540141, -105.1861050505134],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_00c13ecca7905364f04a7833846bf158 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f95f9aa0de3e6a3d49b59d4c7c22c9a8 = $(`<div id="html_f95f9aa0de3e6a3d49b59d4c7c22c9a8" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Shaft Mine</div>`)[0];
+            popup_00c13ecca7905364f04a7833846bf158.setContent(html_f95f9aa0de3e6a3d49b59d4c7c22c9a8);
+        
+
+        marker_70a9f57cba27a274bc7bba06238d82b9.bindPopup(popup_00c13ecca7905364f04a7833846bf158)
+        ;
+
+        
+    
+    
+            marker_70a9f57cba27a274bc7bba06238d82b9.bindTooltip(
+                `<div>
+                     Silver Shaft Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dea100a0943ebff0783c0aac801cd46d = L.marker(
+                [38.75262791480068, -105.23471607314504],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_290d5467fc1a3388a3fd7b1da4f196f9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2f1dacd5062f5649aca7c5cb4146c2a1 = $(`<div id="html_2f1dacd5062f5649aca7c5cb4146c2a1" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Strike No. 1</div>`)[0];
+            popup_290d5467fc1a3388a3fd7b1da4f196f9.setContent(html_2f1dacd5062f5649aca7c5cb4146c2a1);
+        
+
+        marker_dea100a0943ebff0783c0aac801cd46d.bindPopup(popup_290d5467fc1a3388a3fd7b1da4f196f9)
+        ;
+
+        
+    
+    
+            marker_dea100a0943ebff0783c0aac801cd46d.bindTooltip(
+                `<div>
+                     High Strike No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5d8e9a850707d4e0e22239fb6c8468df = L.marker(
+                [38.76337575600526, -105.19606209698804],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_3c02f8fc34bcf4ba5f1e40e483bc3760 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d818a52e43b4315737185f2f4593045c = $(`<div id="html_d818a52e43b4315737185f2f4593045c" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Rock No. 2</div>`)[0];
+            popup_3c02f8fc34bcf4ba5f1e40e483bc3760.setContent(html_d818a52e43b4315737185f2f4593045c);
+        
+
+        marker_5d8e9a850707d4e0e22239fb6c8468df.bindPopup(popup_3c02f8fc34bcf4ba5f1e40e483bc3760)
+        ;
+
+        
+    
+    
+            marker_5d8e9a850707d4e0e22239fb6c8468df.bindTooltip(
+                `<div>
+                     High Rock No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_603f7a610f42f7c8bfe4d0285dc7f5fe = L.marker(
+                [38.76450385350414, -105.19696463278049],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_14eb785b87aaca909893fb8ab8a4e265 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2e7a635054da6eab59f70689e24e1185 = $(`<div id="html_2e7a635054da6eab59f70689e24e1185" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Strike Mine</div>`)[0];
+            popup_14eb785b87aaca909893fb8ab8a4e265.setContent(html_2e7a635054da6eab59f70689e24e1185);
+        
+
+        marker_603f7a610f42f7c8bfe4d0285dc7f5fe.bindPopup(popup_14eb785b87aaca909893fb8ab8a4e265)
+        ;
+
+        
+    
+    
+            marker_603f7a610f42f7c8bfe4d0285dc7f5fe.bindTooltip(
+                `<div>
+                     Black Strike Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a457676fee1cbb0369feeb1e5d828dd5 = L.marker(
+                [38.710040032728955, -105.21758439429954],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b56fa7ea5e928ea270d729885e0938d5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7f8149a0272d2cda1c4febcb5ebe2ab8 = $(`<div id="html_7f8149a0272d2cda1c4febcb5ebe2ab8" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Shaft No. 2</div>`)[0];
+            popup_b56fa7ea5e928ea270d729885e0938d5.setContent(html_7f8149a0272d2cda1c4febcb5ebe2ab8);
+        
+
+        marker_a457676fee1cbb0369feeb1e5d828dd5.bindPopup(popup_b56fa7ea5e928ea270d729885e0938d5)
+        ;
+
+        
+    
+    
+            marker_a457676fee1cbb0369feeb1e5d828dd5.bindTooltip(
+                `<div>
+                     Black Shaft No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5e4e990595af1092ece19da7d8d86f34 = L.marker(
+                [38.71136337196701, -105.15709013837355],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_5c979192076219f3e59f6b9b43683cf1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b0974eb8bba95edc388945b541c1683f = $(`<div id="html_b0974eb8bba95edc388945b541c1683f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Lode No. 2</div>`)[0];
+            popup_5c979192076219f3e59f6b9b43683cf1.setContent(html_b0974eb8bba95edc388945b541c1683f);
+        
+
+        marker_5e4e990595af1092ece19da7d8d86f34.bindPopup(popup_5c979192076219f3e59f6b9b43683cf1)
+        ;
+
+        
+    
+    
+            marker_5e4e990595af1092ece19da7d8d86f34.bindTooltip(
+                `<div>
+                     Crystal Lode No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_21603664e994b2b786171b3dc0ceb3d9 = L.marker(
+                [38.771510531447625, -105.16683344706388],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_1a67a1c6bafe892613293500f9008bbb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9abc5c50b91046c829822c8c9994e450 = $(`<div id="html_9abc5c50b91046c829822c8c9994e450" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Tunnel Extension</div>`)[0];
+            popup_1a67a1c6bafe892613293500f9008bbb.setContent(html_9abc5c50b91046c829822c8c9994e450);
+        
+
+        marker_21603664e994b2b786171b3dc0ceb3d9.bindPopup(popup_1a67a1c6bafe892613293500f9008bbb)
+        ;
+
+        
+    
+    
+            marker_21603664e994b2b786171b3dc0ceb3d9.bindTooltip(
+                `<div>
+                     Deadman Tunnel Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8aa169d28a29bebb56894aa94e9a564e = L.marker(
+                [38.73152598877819, -105.24420748335058],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_12a763239103cb57e655d285d6fa1c57 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dd59a90e573f30d699dd181106d56ea0 = $(`<div id="html_dd59a90e573f30d699dd181106d56ea0" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Rock Mine</div>`)[0];
+            popup_12a763239103cb57e655d285d6fa1c57.setContent(html_dd59a90e573f30d699dd181106d56ea0);
+        
+
+        marker_8aa169d28a29bebb56894aa94e9a564e.bindPopup(popup_12a763239103cb57e655d285d6fa1c57)
+        ;
+
+        
+    
+    
+            marker_8aa169d28a29bebb56894aa94e9a564e.bindTooltip(
+                `<div>
+                     Deep Rock Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9a55871cda31c701c7426f703dbbdea1 = L.marker(
+                [38.77146067194428, -105.15530505547021],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b511094a004aa1a2aad2b961e83b3fee = L.popup({"maxWidth": "100%"});
+
+        
+            var html_081f2bddf3cdc09e8c68c385ac427093 = $(`<div id="html_081f2bddf3cdc09e8c68c385ac427093" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Peak No. 1</div>`)[0];
+            popup_b511094a004aa1a2aad2b961e83b3fee.setContent(html_081f2bddf3cdc09e8c68c385ac427093);
+        
+
+        marker_9a55871cda31c701c7426f703dbbdea1.bindPopup(popup_b511094a004aa1a2aad2b961e83b3fee)
+        ;
+
+        
+    
+    
+            marker_9a55871cda31c701c7426f703dbbdea1.bindTooltip(
+                `<div>
+                     Silver Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_df81f16f33db615a91e2f154f77d3e7a = L.marker(
+                [38.715995741644754, -105.20140095366834],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_efebd669e861bb2f8f985e3758c4b51c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_528cfdd8341b07d7475a6ffa4916bc58 = $(`<div id="html_528cfdd8341b07d7475a6ffa4916bc58" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Peak Mine</div>`)[0];
+            popup_efebd669e861bb2f8f985e3758c4b51c.setContent(html_528cfdd8341b07d7475a6ffa4916bc58);
+        
+
+        marker_df81f16f33db615a91e2f154f77d3e7a.bindPopup(popup_efebd669e861bb2f8f985e3758c4b51c)
+        ;
+
+        
+    
+    
+            marker_df81f16f33db615a91e2f154f77d3e7a.bindTooltip(
+                `<div>
+                     Lost Peak Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d74f1deab5363fb89fc37a1d7fbbb485 = L.marker(
+                [38.71484487629279, -105.17393978347428],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_7086d024e84aa02b360c22d0e406eb17 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ffd6246d4e151861dca4acf3bd37e555 = $(`<div id="html_ffd6246d4e151861dca4acf3bd37e555" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Hill Extension</div>`)[0];
+            popup_7086d024e84aa02b360c22d0e406eb17.setContent(html_ffd6246d4e151861dca4acf3bd37e555);
+        
+
+        marker_d74f1deab5363fb89fc37a1d7fbbb485.bindPopup(popup_7086d024e84aa02b360c22d0e406eb17)
+        ;
+
+        
+    
+    
+            marker_d74f1deab5363fb89fc37a1d7fbbb485.bindTooltip(
+                `<div>
+                     Silver Hill Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3681668d7685d28a8c9cabdf7164dd80 = L.marker(
+                [38.76360841005149, -105.23716085355002],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_4ecf5c102d2e08bd40ec5d5abd63804d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_457f936a86bbd7be8bae35c66ec4920a = $(`<div id="html_457f936a86bbd7be8bae35c66ec4920a" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Rock Extension</div>`)[0];
+            popup_4ecf5c102d2e08bd40ec5d5abd63804d.setContent(html_457f936a86bbd7be8bae35c66ec4920a);
+        
+
+        marker_3681668d7685d28a8c9cabdf7164dd80.bindPopup(popup_4ecf5c102d2e08bd40ec5d5abd63804d)
+        ;
+
+        
+    
+    
+            marker_3681668d7685d28a8c9cabdf7164dd80.bindTooltip(
+                `<div>
+                     Deadman Rock Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3e17682fed096e6b9fb35495200634cb = L.marker(
+                [38.74326976646691, -105.19501964065051],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_fadd0f3c015957bae6a08bbfd34bd20e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4805fd65e59a380c7b3816bf002e6570 = $(`<div id="html_4805fd65e59a380c7b3816bf002e6570" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Tunnel Mine</div>`)[0];
+            popup_fadd0f3c015957bae6a08bbfd34bd20e.setContent(html_4805fd65e59a380c7b3816bf002e6570);
+        
+
+        marker_3e17682fed096e6b9fb35495200634cb.bindPopup(popup_fadd0f3c015957bae6a08bbfd34bd20e)
+        ;
+
+        
+    
+    
+            marker_3e17682fed096e6b9fb35495200634cb.bindTooltip(
+                `<div>
+                     Lost Tunnel Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d52d7cfd6a853315d70541d95c725122 = L.marker(
+                [38.72855396402581, -105.16275669589147],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e433111412e160de32a0744dde675552 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ac3771017bd273ed1d0902215d653a15 = $(`<div id="html_ac3771017bd273ed1d0902215d653a15" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Hill No. 1</div>`)[0];
+            popup_e433111412e160de32a0744dde675552.setContent(html_ac3771017bd273ed1d0902215d653a15);
+        
+
+        marker_d52d7cfd6a853315d70541d95c725122.bindPopup(popup_e433111412e160de32a0744dde675552)
+        ;
+
+        
+    
+    
+            marker_d52d7cfd6a853315d70541d95c725122.bindTooltip(
+                `<div>
+                     Lucky Hill No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9e3a0aa2c7ade7019ba3a48fb3f21620 = L.marker(
+                [38.73961965581406, -105.2288201794558],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_121a1aac3a9ce912232caed248a63855 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_84193879f14b34cd097aa4b3f42da8b2 = $(`<div id="html_84193879f14b34cd097aa4b3f42da8b2" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Spur Prospect</div>`)[0];
+            popup_121a1aac3a9ce912232caed248a63855.setContent(html_84193879f14b34cd097aa4b3f42da8b2);
+        
+
+        marker_9e3a0aa2c7ade7019ba3a48fb3f21620.bindPopup(popup_121a1aac3a9ce912232caed248a63855)
+        ;
+
+        
+    
+    
+            marker_9e3a0aa2c7ade7019ba3a48fb3f21620.bindTooltip(
+                `<div>
+                     Crystal Spur Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_bd74a121647827300e0880dbb0c500c0 = L.marker(
+                [38.74775072621456, -105.177006893091],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_3194d35225c50dc29fedb5eebdf3cd31 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d7f8dc70bf7b7bf25817225bfac40a65 = $(`<div id="html_d7f8dc70bf7b7bf25817225bfac40a65" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Spur Group</div>`)[0];
+            popup_3194d35225c50dc29fedb5eebdf3cd31.setContent(html_d7f8dc70bf7b7bf25817225bfac40a65);
+        
+
+        marker_bd74a121647827300e0880dbb0c500c0.bindPopup(popup_3194d35225c50dc29fedb5eebdf3cd31)
+        ;
+
+        
+    
+    
+            marker_bd74a121647827300e0880dbb0c500c0.bindTooltip(
+                `<div>
+                     Lucky Spur Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0ab991e287d6170bcf44188db75ef2bc = L.marker(
+                [38.72408057443728, -105.21882837086991],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_e678954d9b7daf7cfff3232332f462e8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4cbd1bc69e1e84315ca9ac22bd99d8ee = $(`<div id="html_4cbd1bc69e1e84315ca9ac22bd99d8ee" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Strike No. 2</div>`)[0];
+            popup_e678954d9b7daf7cfff3232332f462e8.setContent(html_4cbd1bc69e1e84315ca9ac22bd99d8ee);
+        
+
+        marker_0ab991e287d6170bcf44188db75ef2bc.bindPopup(popup_e678954d9b7daf7cfff3232332f462e8)
+        ;
+
+        
+    
+    
+            marker_0ab991e287d6170bcf44188db75ef2bc.bindTooltip(
+                `<div>
+                     Deep Strike No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6e318c60c9af9e5b9db8930781deb8c3 = L.marker(
+                [38.77966045496626, -105.18501219423605],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_6dd7fe9e55ffa89196bdfc757158572f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7e99545fb2fbfa7360225ec0d0332746 = $(`<div id="html_7e99545fb2fbfa7360225ec0d0332746" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Lode Prospect</div>`)[0];
+            popup_6dd7fe9e55ffa89196bdfc757158572f.setContent(html_7e99545fb2fbfa7360225ec0d0332746);
+        
+
+        marker_6e318c60c9af9e5b9db8930781deb8c3.bindPopup(popup_6dd7fe9e55ffa89196bdfc757158572f)
+        ;
+
+        
+    
+    
+            marker_6e318c60c9af9e5b9db8930781deb8c3.bindTooltip(
+                `<div>
+                     Lucky Lode Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4539e8ebaa680cce6981830e2bdafb58 = L.marker(
+                [38.740667005874016, -105.19824241589644],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_1295e5950de369215b717af22c10f488 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3604df1653082ad1d1a3e3d588ed0f0d = $(`<div id="html_3604df1653082ad1d1a3e3d588ed0f0d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Hill No. 2</div>`)[0];
+            popup_1295e5950de369215b717af22c10f488.setContent(html_3604df1653082ad1d1a3e3d588ed0f0d);
+        
+
+        marker_4539e8ebaa680cce6981830e2bdafb58.bindPopup(popup_1295e5950de369215b717af22c10f488)
+        ;
+
+        
+    
+    
+            marker_4539e8ebaa680cce6981830e2bdafb58.bindTooltip(
+                `<div>
+                     Deadman Hill No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a329abbba2eaae0eadc981b3d080b81d = L.marker(
+                [38.71847029371078, -105.22753026629684],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b7688a0fad0c9f012d9b09e9655b7464 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_697365d72f43824f2ec1345f81bbcc53 = $(`<div id="html_697365d72f43824f2ec1345f81bbcc53" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Peak Group</div>`)[0];
+            popup_b7688a0fad0c9f012d9b09e9655b7464.setContent(html_697365d72f43824f2ec1345f81bbcc53);
+        
+
+        marker_a329abbba2eaae0eadc981b3d080b81d.bindPopup(popup_b7688a0fad0c9f012d9b09e9655b7464)
+        ;
+
+        
+    
+    
+            marker_a329abbba2eaae0eadc981b3d080b81d.bindTooltip(
+                `<div>
+                     Silver Peak Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_869d034e5e23bcdfc93072a4bc04601b = L.marker(
+                [38.73366598935032, -105.19116912815429],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_74af438901890bd1335ca2d4b001b75c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_043d2dbf096fae6aa219cc397004f9a6 = $(`<div id="html_043d2dbf096fae6aa219cc397004f9a6" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Shaft No. 2</div>`)[0];
+            popup_74af438901890bd1335ca2d4b001b75c.setContent(html_043d2dbf096fae6aa219cc397004f9a6);
+        
+
+        marker_869d034e5e23bcdfc93072a4bc04601b.bindPopup(popup_74af438901890bd1335ca2d4b001b75c)
+        ;
+
+        
+    
+    
+            marker_869d034e5e23bcdfc93072a4bc04601b.bindTooltip(
+                `<div>
+                     Crystal Shaft No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b46e2a43b33fec6e8d8efb199c169cc9 = L.marker(
+                [38.72610803128176, -105.22797826155484],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_045ee58c795a391cc94fa5220e513590 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_65f4eb54d2705352eb96f7189ecfc075 = $(`<div id="html_65f4eb54d2705352eb96f7189ecfc075" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Peak Group</div>`)[0];
+            popup_045ee58c795a391cc94fa5220e513590.setContent(html_65f4eb54d2705352eb96f7189ecfc075);
+        
+
+        marker_b46e2a43b33fec6e8d8efb199c169cc9.bindPopup(popup_045ee58c795a391cc94fa5220e513590)
+        ;
+
+        
+    
+    
+            marker_b46e2a43b33fec6e8d8efb199c169cc9.bindTooltip(
+                `<div>
+                     Lucky Peak Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1c186f59d4799fad7fb52a079d0b8432 = L.marker(
+                [38.71496951602063, -105.186889704273],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_929d2e7bfce2bc0fe2583308d5aabfcf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_917c92ae529f2830229d32fa30f67601 = $(`<div id="html_917c92ae529f2830229d32fa30f67601" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Iron Strike Extension</div>`)[0];
+            popup_929d2e7bfce2bc0fe2583308d5aabfcf.setContent(html_917c92ae529f2830229d32fa30f67601);
+        
+
+        marker_1c186f59d4799fad7fb52a079d0b8432.bindPopup(popup_929d2e7bfce2bc0fe2583308d5aabfcf)
+        ;
+
+        
+    
+    
+            marker_1c186f59d4799fad7fb52a079d0b8432.bindTooltip(
+                `<div>
+                     Iron Strike Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cb76efb9bfa76735f5908149580dae82 = L.marker(
+                [38.72602592486678, -105.1594579986994],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_05b007eab40f80f56519ec223853a5f4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_72d69f0883efcf816dd5d784be882a94 = $(`<div id="html_72d69f0883efcf816dd5d784be882a94" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Claim Group</div>`)[0];
+            popup_05b007eab40f80f56519ec223853a5f4.setContent(html_72d69f0883efcf816dd5d784be882a94);
+        
+
+        marker_cb76efb9bfa76735f5908149580dae82.bindPopup(popup_05b007eab40f80f56519ec223853a5f4)
+        ;
+
+        
+    
+    
+            marker_cb76efb9bfa76735f5908149580dae82.bindTooltip(
+                `<div>
+                     Lucky Claim Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3fbdbb7f85ef8545d8c89b0060637f77 = L.marker(
+                [38.770174478017765, -105.24291426501114],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_3d60ff787a00569de14b4cc8353eb029 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cecbd6a6ab9680bc01e25ca36bf8abbb = $(`<div id="html_cecbd6a6ab9680bc01e25ca36bf8abbb" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Peak Extension</div>`)[0];
+            popup_3d60ff787a00569de14b4cc8353eb029.setContent(html_cecbd6a6ab9680bc01e25ca36bf8abbb);
+        
+
+        marker_3fbdbb7f85ef8545d8c89b0060637f77.bindPopup(popup_3d60ff787a00569de14b4cc8353eb029)
+        ;
+
+        
+    
+    
+            marker_3fbdbb7f85ef8545d8c89b0060637f77.bindTooltip(
+                `<div>
+                     Lost Peak Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1efd9a1a34877e7cde088ad4106f00cd = L.marker(
+                [38.72666032440583, -105.18310222217038],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_f399b9b664ff3d352455cf9cbf9aabdc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7efadd5947038798d57e2b16ae961f1f = $(`<div id="html_7efadd5947038798d57e2b16ae961f1f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deep Spur No. 2</div>`)[0];
+            popup_f399b9b664ff3d352455cf9cbf9aabdc.setContent(html_7efadd5947038798d57e2b16ae961f1f);
+        
+
+        marker_1efd9a1a34877e7cde088ad4106f00cd.bindPopup(popup_f399b9b664ff3d352455cf9cbf9aabdc)
+        ;
+
+        
+    
+    
+            marker_1efd9a1a34877e7cde088ad4106f00cd.bindTooltip(
+                `<div>
+                     Deep Spur No. 2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b18659435a88d0481c8631575869fb88 = L.marker(
+                [38.724996576515935, -105.2367688151275],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_55b42af721a574b9cdf9e175c51ae31b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7cbb5f25a1f2a3b72c53141845a49020 = $(`<div id="html_7cbb5f25a1f2a3b72c53141845a49020" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Crystal Strike Extension</div>`)[0];
+            popup_55b42af721a574b9cdf9e175c51ae31b.setContent(html_7cbb5f25a1f2a3b72c53141845a49020);
+        
+
+        marker_b18659435a88d0481c8631575869fb88.bindPopup(popup_55b42af721a574b9cdf9e175c51ae31b)
+        ;
+
+        
+    
+    
+            marker_b18659435a88d0481c8631575869fb88.bindTooltip(
+                `<div>
+                     Crystal Strike Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8c337059ca97deb7ec2aa6495a7fffe0 = L.marker(
+                [38.77548599684065, -105.19289569066747],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_6380aa06d4c3fc5fb7f28ec034c9f92b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d0dae7e65c75f0cd4b8e976f063f4b0d = $(`<div id="html_d0dae7e65c75f0cd4b8e976f063f4b0d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Hill Prospect</div>`)[0];
+            popup_6380aa06d4c3fc5fb7f28ec034c9f92b.setContent(html_d0dae7e65c75f0cd4b8e976f063f4b0d);
+        
+
+        marker_8c337059ca97deb7ec2aa6495a7fffe0.bindPopup(popup_6380aa06d4c3fc5fb7f28ec034c9f92b)
+        ;
+
+        
+    
+    
+            marker_8c337059ca97deb7ec2aa6495a7fffe0.bindTooltip(
+                `<div>
+                     Lost Hill Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_40765071750fa40d021bbe5c1f9ff74a = L.marker(
+                [38.74308697184183, -105.17153805757093],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_b5e1c27bc70a7bac4930653ee1dc210b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0c7f6b2c1c1ffb16248d54876dcb5547 = $(`<div id="html_0c7f6b2c1c1ffb16248d54876dcb5547" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Deadman Ridge Extension</div>`)[0];
+            popup_b5e1c27bc70a7bac4930653ee1dc210b.setContent(html_0c7f6b2c1c1ffb16248d54876dcb5547);
+        
+
+        marker_40765071750fa40d021bbe5c1f9ff74a.bindPopup(popup_b5e1c27bc70a7bac4930653ee1dc210b)
+        ;
+
+        
+    
+    
+            marker_40765071750fa40d021bbe5c1f9ff74a.bindTooltip(
+                `<div>
+                     Deadman Ridge Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1f1bead47888882a993307738a3119ad = L.marker(
+                [38.766524789843665, -105.23095900856381],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_58a199daf69be8946b06951ff8411825 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_caaf3ed8cd4a128871e91d8443d433eb = $(`<div id="html_caaf3ed8cd4a128871e91d8443d433eb" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Strike Group</div>`)[0];
+            popup_58a199daf69be8946b06951ff8411825.setContent(html_caaf3ed8cd4a128871e91d8443d433eb);
+        
+
+        marker_1f1bead47888882a993307738a3119ad.bindPopup(popup_58a199daf69be8946b06951ff8411825)
+        ;
+
+        
+    
+    
+            marker_1f1bead47888882a993307738a3119ad.bindTooltip(
+                `<div>
+                     High Strike Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4920a4ce9fc4c42dd62d9f8b21b3719f = L.marker(
+                [38.71678515699602, -105.20689488175937],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_86420f5d3bd80c60515d2d1b90440e66 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0e404317268a91c208e771c8162bb111 = $(`<div id="html_0e404317268a91c208e771c8162bb111" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> High Claim Prospect</div>`)[0];
+            popup_86420f5d3bd80c60515d2d1b90440e66.setContent(html_0e404317268a91c208e771c8162bb111);
+        
+
+        marker_4920a4ce9fc4c42dd62d9f8b21b3719f.bindPopup(popup_86420f5d3bd80c60515d2d1b90440e66)
+        ;
+
+        
+    
+    
+            marker_4920a4ce9fc4c42dd62d9f8b21b3719f.bindTooltip(
+                `<div>
+                     High Claim Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_adb74a0f4ea7609ecfc98f0c20db0879 = L.marker(
+                [38.739650503611394, -105.20329753319633],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_426e95b99358d1bfe2c1f92cb4c10974 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_084b84ebe5f9351e7fb7ab34420f28ce = $(`<div id="html_084b84ebe5f9351e7fb7ab34420f28ce" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Silver Peak Group</div>`)[0];
+            popup_426e95b99358d1bfe2c1f92cb4c10974.setContent(html_084b84ebe5f9351e7fb7ab34420f28ce);
+        
+
+        marker_adb74a0f4ea7609ecfc98f0c20db0879.bindPopup(popup_426e95b99358d1bfe2c1f92cb4c10974)
+        ;
+
+        
+    
+    
+            marker_adb74a0f4ea7609ecfc98f0c20db0879.bindTooltip(
+                `<div>
+                     Silver Peak Group
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_726934ff573ae733ad3d5aa3555e8101 = L.marker(
+                [38.76103530946219, -105.18266354527067],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_3a23e05e5f5c28350acea67a0c218284 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1f0252941559b2d5674ce52a3fa324a9 = $(`<div id="html_1f0252941559b2d5674ce52a3fa324a9" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Rock Mine</div>`)[0];
+            popup_3a23e05e5f5c28350acea67a0c218284.setContent(html_1f0252941559b2d5674ce52a3fa324a9);
+        
+
+        marker_726934ff573ae733ad3d5aa3555e8101.bindPopup(popup_3a23e05e5f5c28350acea67a0c218284)
+        ;
+
+        
+    
+    
+            marker_726934ff573ae733ad3d5aa3555e8101.bindTooltip(
+                `<div>
+                     Lost Rock Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1bb48a06a964ca4c60ee52949abf8269 = L.marker(
+                [38.77889156479562, -105.24015821288481],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_a7f1065585985b9f9aefe572f2fe4905 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_18df5c18f6b4e19ccb0aa7cf4b0cc723 = $(`<div id="html_18df5c18f6b4e19ccb0aa7cf4b0cc723" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Peak No. 1</div>`)[0];
+            popup_a7f1065585985b9f9aefe572f2fe4905.setContent(html_18df5c18f6b4e19ccb0aa7cf4b0cc723);
+        
+
+        marker_1bb48a06a964ca4c60ee52949abf8269.bindPopup(popup_a7f1065585985b9f9aefe572f2fe4905)
+        ;
+
+        
+    
+    
+            marker_1bb48a06a964ca4c60ee52949abf8269.bindTooltip(
+                `<div>
+                     Black Peak No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b58167dcc0844fb70fad7939d8daf460 = L.marker(
+                [38.73818348974716, -105.21606973946051],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_fafe328247ca8716bb685a9c746a7d9c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8aec1f51d718e7d82bf3a6b7401b5bc7 = $(`<div id="html_8aec1f51d718e7d82bf3a6b7401b5bc7" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Claim Mine</div>`)[0];
+            popup_fafe328247ca8716bb685a9c746a7d9c.setContent(html_8aec1f51d718e7d82bf3a6b7401b5bc7);
+        
+
+        marker_b58167dcc0844fb70fad7939d8daf460.bindPopup(popup_fafe328247ca8716bb685a9c746a7d9c)
+        ;
+
+        
+    
+    
+            marker_b58167dcc0844fb70fad7939d8daf460.bindTooltip(
+                `<div>
+                     Black Claim Mine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5e94f914a0de9cd7625f9e929e661dc2 = L.marker(
+                [38.770317077544696, -105.22513436660797],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_be4aabf73a7e0e5cdc9f6697442d116b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_492e23cafa283a820d725e9d36b36519 = $(`<div id="html_492e23cafa283a820d725e9d36b36519" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Strike Extension</div>`)[0];
+            popup_be4aabf73a7e0e5cdc9f6697442d116b.setContent(html_492e23cafa283a820d725e9d36b36519);
+        
+
+        marker_5e94f914a0de9cd7625f9e929e661dc2.bindPopup(popup_be4aabf73a7e0e5cdc9f6697442d116b)
+        ;
+
+        
+    
+    
+            marker_5e94f914a0de9cd7625f9e929e661dc2.bindTooltip(
+                `<div>
+                     Golden Strike Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_385614602c39243bd841255941369d7f = L.marker(
+                [38.72331462359086, -105.20513864521669],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_39d77fcef96f70aac892d3e0ef1a8850 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_25707f3d95dfb0a2c33b2bf7b2de2ef8 = $(`<div id="html_25707f3d95dfb0a2c33b2bf7b2de2ef8" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lost Lode Extension</div>`)[0];
+            popup_39d77fcef96f70aac892d3e0ef1a8850.setContent(html_25707f3d95dfb0a2c33b2bf7b2de2ef8);
+        
+
+        marker_385614602c39243bd841255941369d7f.bindPopup(popup_39d77fcef96f70aac892d3e0ef1a8850)
+        ;
+
+        
+    
+    
+            marker_385614602c39243bd841255941369d7f.bindTooltip(
+                `<div>
+                     Lost Lode Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3da4f38ce36716e68033763a4f6ec7aa = L.marker(
+                [38.739531714788406, -105.2221454855333],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_a4053c49798edcf6506d3fe44583daf5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_10f4ed2378f604f64fba5b04afbc7416 = $(`<div id="html_10f4ed2378f604f64fba5b04afbc7416" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Hill No. 1</div>`)[0];
+            popup_a4053c49798edcf6506d3fe44583daf5.setContent(html_10f4ed2378f604f64fba5b04afbc7416);
+        
+
+        marker_3da4f38ce36716e68033763a4f6ec7aa.bindPopup(popup_a4053c49798edcf6506d3fe44583daf5)
+        ;
+
+        
+    
+    
+            marker_3da4f38ce36716e68033763a4f6ec7aa.bindTooltip(
+                `<div>
+                     Lucky Hill No. 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ba98d9971a249ff5655a6d7fb00a4cd5 = L.marker(
+                [38.72748645135175, -105.1576734400724],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_ba40431212cd8b52278c46fe32454473 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e2ed1bfc2681f10289e228098a989b0d = $(`<div id="html_e2ed1bfc2681f10289e228098a989b0d" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Lucky Ridge Extension</div>`)[0];
+            popup_ba40431212cd8b52278c46fe32454473.setContent(html_e2ed1bfc2681f10289e228098a989b0d);
+        
+
+        marker_ba98d9971a249ff5655a6d7fb00a4cd5.bindPopup(popup_ba40431212cd8b52278c46fe32454473)
+        ;
+
+        
+    
+    
+            marker_ba98d9971a249ff5655a6d7fb00a4cd5.bindTooltip(
+                `<div>
+                     Lucky Ridge Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c032da8e2d76dccd64cd1d95b2b11766 = L.marker(
+                [38.74101915215374, -105.16386508952382],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_85dea9a7a260b7bb210030af8b99fc62 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ef891fbf3a164fd527b1843cc2ac0c4f = $(`<div id="html_ef891fbf3a164fd527b1843cc2ac0c4f" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Claim Prospect</div>`)[0];
+            popup_85dea9a7a260b7bb210030af8b99fc62.setContent(html_ef891fbf3a164fd527b1843cc2ac0c4f);
+        
+
+        marker_c032da8e2d76dccd64cd1d95b2b11766.bindPopup(popup_85dea9a7a260b7bb210030af8b99fc62)
+        ;
+
+        
+    
+    
+            marker_c032da8e2d76dccd64cd1d95b2b11766.bindTooltip(
+                `<div>
+                     Black Claim Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_103287c7b1269edc2ae36c98fe61142a = L.marker(
+                [38.74852277187149, -105.24494116704751],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_627bff383aa6dba5d613b64d359f738e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9441c276770631cbe506cbf6cbab549c = $(`<div id="html_9441c276770631cbe506cbf6cbab549c" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Golden Lode Extension</div>`)[0];
+            popup_627bff383aa6dba5d613b64d359f738e.setContent(html_9441c276770631cbe506cbf6cbab549c);
+        
+
+        marker_103287c7b1269edc2ae36c98fe61142a.bindPopup(popup_627bff383aa6dba5d613b64d359f738e)
+        ;
+
+        
+    
+    
+            marker_103287c7b1269edc2ae36c98fe61142a.bindTooltip(
+                `<div>
+                     Golden Lode Extension
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1f4defd788e38637c6a48922a5da7d13 = L.marker(
+                [38.77994977278889, -105.166397241492],
+                {}
+            ).addTo(marker_cluster_fe02ded11b8965685b91d0687c158731);
+        
+    
+        var popup_61d03b018b119d7c6b7be551220de060 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_126e369afc47ef6326a8ed3052c0cc40 = $(`<div id="html_126e369afc47ef6326a8ed3052c0cc40" style="width: 100.0%; height: 100.0%;"><b>Site Name:</b> Black Claim Prospect</div>`)[0];
+            popup_61d03b018b119d7c6b7be551220de060.setContent(html_126e369afc47ef6326a8ed3052c0cc40);
+        
+
+        marker_1f4defd788e38637c6a48922a5da7d13.bindPopup(popup_61d03b018b119d7c6b7be551220de060)
+        ;
+
+        
+    
+    
+            marker_1f4defd788e38637c6a48922a5da7d13.bindTooltip(
+                `<div>
+                     Black Claim Prospect
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var heat_map_a767fcb3e56bde52ebc84c6b761715a6 = L.heatLayer(
+                [[38.754759875892056, -105.24749892447774], [38.72925205228584, -105.22767892618512], [38.76155298499148, -105.18233005125771], [38.77245256973934, -105.24130611673706], [38.73953452737797, -105.2470202780562], [38.725304658236254, -105.19946447118967], [38.711857517877874, -105.23011623493133], [38.755491910644565, -105.19550585193969], [38.72543084354285, -105.19107343161241], [38.76666013196745, -105.24935012403219], [38.766407347628295, -105.18018606050119], [38.73381753615626, -105.23445205001882], [38.777004915054476, -105.21634054548873], [38.71649220903661, -105.24032836231666], [38.76932460564432, -105.18962739686332], [38.76649897912921, -105.17702682133063], [38.74753596640183, -105.15268842360207], [38.73649740640459, -105.19479593687268], [38.76805832649771, -105.18814802476358], [38.77031948302176, -105.19226478547432], [38.75932002853504, -105.24541756163444], [38.72595287929561, -105.22106120363979], [38.71558543838466, -105.2267209113639], [38.717070100058685, -105.22220263968899], [38.75449791109851, -105.213516782103], [38.73591266769818, -105.22904929692285], [38.72868844754344, -105.15633454122876], [38.755362476967264, -105.1890868994333], [38.72197970537387, -105.17708732020498], [38.72143817456334, -105.21205445582424], [38.77926663454456, -105.18600002401459], [38.748986482064225, -105.18153857490101], [38.76899963441329, -105.17240000884539], [38.72603336503749, -105.2467899756096], [38.73208171336414, -105.22322591240243], [38.72476879905104, -105.1557090285665], [38.77134573385309, -105.21853221192015], [38.75588070657064, -105.21043680989393], [38.77401833128184, -105.20411481474126], [38.72854161165486, -105.2253372492306], [38.74929576939142, -105.2237258391477], [38.75092101931565, -105.16021771163976], [38.73795803535983, -105.22806792408427], [38.77982763245466, -105.19904737063236], [38.71636365885217, -105.24528836245753], [38.71767543912455, -105.1872553958297], [38.76544555550541, -105.20778400332003], [38.71444693943064, -105.21183807134935], [38.779728496616805, -105.19708856549009], [38.77797548643296, -105.16392202977656], [38.710803671536, -105.17792781806398], [38.75771972583186, -105.19630296695912], [38.72867776329668, -105.18590382014202], [38.71780865215171, -105.20652347493309], [38.741760659443045, -105.1546184072479], [38.771309705826475, -105.22366109492489], [38.74504102791352, -105.23213481194699], [38.77388394875414, -105.16294814301632], [38.73089113540141, -105.1861050505134], [38.75262791480068, -105.23471607314504], [38.76337575600526, -105.19606209698804], [38.76450385350414, -105.19696463278049], [38.710040032728955, -105.21758439429954], [38.71136337196701, -105.15709013837355], [38.771510531447625, -105.16683344706388], [38.73152598877819, -105.24420748335058], [38.77146067194428, -105.15530505547021], [38.715995741644754, -105.20140095366834], [38.71484487629279, -105.17393978347428], [38.76360841005149, -105.23716085355002], [38.74326976646691, -105.19501964065051], [38.72855396402581, -105.16275669589147], [38.73961965581406, -105.2288201794558], [38.74775072621456, -105.177006893091], [38.72408057443728, -105.21882837086991], [38.77966045496626, -105.18501219423605], [38.740667005874016, -105.19824241589644], [38.71847029371078, -105.22753026629684], [38.73366598935032, -105.19116912815429], [38.72610803128176, -105.22797826155484], [38.71496951602063, -105.186889704273], [38.72602592486678, -105.1594579986994], [38.770174478017765, -105.24291426501114], [38.72666032440583, -105.18310222217038], [38.724996576515935, -105.2367688151275], [38.77548599684065, -105.19289569066747], [38.74308697184183, -105.17153805757093], [38.766524789843665, -105.23095900856381], [38.71678515699602, -105.20689488175937], [38.739650503611394, -105.20329753319633], [38.76103530946219, -105.18266354527067], [38.77889156479562, -105.24015821288481], [38.73818348974716, -105.21606973946051], [38.770317077544696, -105.22513436660797], [38.72331462359086, -105.20513864521669], [38.739531714788406, -105.2221454855333], [38.72748645135175, -105.1576734400724], [38.74101915215374, -105.16386508952382], [38.74852277187149, -105.24494116704751], [38.77994977278889, -105.166397241492]],
+                {"blur": 15, "maxZoom": 18, "minOpacity": 0.4, "radius": 10}
+            ).addTo(map_ee4b1232ba1247af36519f346d96e529);
+        
+    
+            var layer_control_0365fabc84306053f3da2517f5c90c56 = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_792fa4061ce83fa15bbcf0576f866f22,
+                },
+                overlays :  {
+                    "Mining Claims" : marker_cluster_fe02ded11b8965685b91d0687c158731,
+                    "Heatmap" : heat_map_a767fcb3e56bde52ebc84c6b761715a6,
+                },
+            };
+            L.control.layers(
+                layer_control_0365fabc84306053f3da2517f5c90c56.base_layers,
+                layer_control_0365fabc84306053f3da2517f5c90c56.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_ee4b1232ba1247af36519f346d96e529);
+        
+</script>
+</html>
